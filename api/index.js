@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const products = require("./data/Products")
 dotenv.config();
 const PORT = process.env.PORT;
+const cors = require("cors")
 const mongoose = require("mongoose");
 
 //connect db
@@ -17,6 +18,8 @@ const productRoute = require("./routes/Product");
 const orderRoute = require("./routes/Order");
 
 app.use(express.json())
+
+app.use(cors())
 
 //database seeder
 app.use('/api/seed', databaseSeeder)
