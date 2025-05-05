@@ -4,11 +4,9 @@ const dotenv = require("dotenv");
 const products = require("./data/Products")
 dotenv.config();
 const PORT = process.env.PORT;
-
 const mongoose = require("mongoose");
 
 //connect db
-
 mongoose.connect(process.env.MONGOOSEDB_URL).then(() => console.log("db connected")).then((err) => {
     err;
 });
