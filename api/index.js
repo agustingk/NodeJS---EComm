@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const products = require("./data/Products")
 dotenv.config();
 const PORT = process.env.PORT;
-const cors = require("cors")
+const cors = require("cors");
 const mongoose = require("mongoose");
 
 //connect db
@@ -35,7 +35,7 @@ app.use('/api/products', productRoute)
 app.use("/api/orders", orderRoute)
 
 
-app.listen(PORT || 9000, () => {
+app.listen(PORT || 3000, () => {
     console.log(`server listening on port ${PORT}`)
 })
 
