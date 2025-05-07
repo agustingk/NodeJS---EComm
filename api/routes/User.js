@@ -28,7 +28,7 @@ userRoute.post('/login', AsyncHandler(
 )
 
 //register route
-userRoute.post('/', AsyncHandler(async (req, res) => {
+userRoute.post('/Register', AsyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
     const existUser = await User.findOne({ email });
     if (existUser) {
