@@ -3,15 +3,24 @@ import { useSelector } from "react-redux";
 import { UserDropdown } from "../components/Dropdown";
 import { userLogoutAction } from "../Redux/Actions/User";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
+import Checkout from "../pages/Checkout";
+
+
 
 const Navbar = () => {
     const userLoginReducer = useSelector((state) => state.userLoginReducer);
     const { userInfo } = userLoginReducer;
     const dispatch = useDispatch();
 
+    const qty = useSelector((state) => state.cartReducer.cartItems.reduce((total, item) => total + item.qty, 0));
+
     const logoutHandler = () => {
         dispatch(userLogoutAction());
     }
+
+    const [open, setOpen] = useState(false);
+
     return (
         <>
             <div className="navbar bg-base-100 shadow-sm">
@@ -43,18 +52,25 @@ const Navbar = () => {
                     <Link to={`/`} className="btn btn-ghost text-4xl">CUAK</Link>
                 </div>
 
-
-
-                {!userInfo ? (
-                    <div className="flex-none">
+                <div className="flex items-center gap-x-4">
+                    {!userInfo ? (
                         <Link to={`/register`} className="btn btn-lg">Get Started!</Link>
-                    </div>
-                ) : (
-                    <UserDropdown logoutHandler={logoutHandler}>
+                    ) : (
+                        <UserDropdown logoutHandler={logoutHandler}>
+                        </UserDropdown>
 
-                    </UserDropdown>
-                )}
+                    )}
+                    <button onClick={()=>setOpen(true)} className="btn btn-ghost btn-circle relative cursor-pointer hover:scale-110 transition-all duration-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                        </svg>
+                        <span className="badge badge-sm indicator-item">{qty}</span>
+                    </button>
+
+                </div>
             </div>
+
+            <Checkout open={open} setOpen={setOpen}></Checkout>
         </>
     )
 }

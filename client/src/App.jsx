@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import Home from './pages/Home';
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
+import Checkout from './pages/Checkout';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
           <Route exact path="/products/:id" element={<ProductDetail />}></Route>
           <Route exact path="/login" element={userInfo ? <Navigate to="/"></Navigate> : <Login/>}></Route>
           <Route exact path="/register" element={userInfo ? <Navigate to="/"></Navigate>: <Register/>}></Route>
+          {/* <Route exact path="/checkout" element={<Checkout />}></Route> */}
         </Routes>
       </Router>
     </>
